@@ -3,6 +3,7 @@ using Ascent.Core.Systems.Particles;
 using rail;
 using System.Collections.Generic;
 using Terraria.ModLoader;
+using Ascent.Configs;
 
 namespace Ascent
 {
@@ -10,7 +11,7 @@ namespace Ascent
 	{
         public static Mod Instance;
 
-        public int ParticleLimit = 255;
+        public int ParticleLimit = ModContent.GetInstance<AscentServerConfig>().ParticleLimit;
 
         public Ascent() 
         {

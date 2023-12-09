@@ -93,7 +93,7 @@ namespace Ascent.Content.NPCs.Events.Starfall
             {
                 case (float)States.Walking:
 
-                    if(-500 < delta.X && delta.X < 500)
+                    if(-500 < delta.X && delta.X < 500) //I hate this
                     {
                         State = (float)States.Slash;
                         Timer[1] = 0;

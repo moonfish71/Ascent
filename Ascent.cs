@@ -11,8 +11,6 @@ namespace Ascent
 	{
         public static Mod Instance;
 
-        public int ParticleLimit = ModContent.GetInstance<AscentServerConfig>().ParticleLimit;
-
         public Ascent() 
         {
             Instance = this;

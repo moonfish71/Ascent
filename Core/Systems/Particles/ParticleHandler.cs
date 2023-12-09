@@ -6,11 +6,14 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
+using Ascent.Configs;
 
 namespace Ascent.Core.Systems.Particles
 {
     public class ParticleHandler
     {
+        public static int ParticleCount = (int)ModContent.GetInstance<AscentServerConfig>().ParticleLimit;
+
         public static List<Particle> Particles;
 
         public static List<Particle> BGParticles;
@@ -19,11 +22,11 @@ namespace Ascent.Core.Systems.Particles
 
         public static void SetHooks()
         {
-            Particles = new List<Particle>(ModContent.GetInstance<Ascent>().ParticleLimit);
+            Particles = new List<Particle>(ParticleCount);
 
-            BGParticles = new List<Particle>(ModContent.GetInstance<Ascent>().ParticleLimit);
-            PLParticles = new List<Particle>(ModContent.GetInstance<Ascent>().ParticleLimit);
-            FGParticles = new List<Particle>(ModContent.GetInstance<Ascent>().ParticleLimit);
+            BGParticles = new List<Particle>(ParticleCount);
+            PLParticles = new List<Particle>(ParticleCount);
+            FGParticles = new List<Particle>(ParticleCount);
 
             On_Main.DrawBackGore += DrawBG;
             On_Main.DrawInfernoRings += DrawFG;

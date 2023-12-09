@@ -44,7 +44,7 @@ Items: {
 
 NPCs: {
 	ThrallS.DisplayName: Thrall Drone
-	ThrallL.DisplayName: Rhrall Supermajor
+	ThrallL.DisplayName: Thrall Supermajor
 	ThrallM.DisplayName: Thrall Soldier
 	AsterBoss.DisplayName: Fell Aster
 }

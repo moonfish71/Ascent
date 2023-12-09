@@ -83,52 +83,52 @@ namespace Ascent.Content.NPCs.Events.Starfall
 
             bool dashCheck = false;
 
-            switch (State)
-            {
-                case (float)States.Walking:
+            //switch (State)
+            //{
+            //    case (float)States.Walking:
 
-                    if(delta.Length() < 200 && !dashCheck)
-                    {
-                        NPC.netUpdate = true;
-                        if (Main.rand.NextBool())
-                        {
-                            State = (float)States.Dashing;
-                        }
-                        else
-                        {
-                            Timer[0] = 0;
-                        }
+            //        if(delta.Length() < 200 && !dashCheck)
+            //        {
+            //            NPC.netUpdate = true;
+            //            if (Main.rand.NextBool())
+            //            {
+            //                State = (float)States.Dashing;
+            //            }
+            //            else
+            //            {
+            //                Timer[0] = 0;
+            //            }
 
-                        dashCheck = true;
+            //            dashCheck = true;
 
-                        NPC.netUpdate = false;
-                    }
-                    else if (dashCheck && Timer[0] > 300)
-                    {
-                        State = (float)States.Dashing;
-                        dashCheck = false;
-                    }
+            //            NPC.netUpdate = false;
+            //        }
+            //        else if (dashCheck && Timer[0] > 300)
+            //        {
+            //            State = (float)States.Dashing;
+            //            dashCheck = false;
+            //        }
 
-                    if (delta.Length() < 50f)
-                    {
-                        Timer[0] = 0;
-                        State = 1;
-                    }
-                    break;
-                case (float)States.Slash:
-                    if (Timer[0] > 60)
-                    {
-                        Timer[0] = 0;
-                        State = 0;
-                    }
-                    break;
-                case (float)States.Dashing:
-                    if (Timer[0] > 180 && NPC.velocity.Y == 0f)
-                    {
-                        State = (float)States.Walking;
-                    }
-                    break;
-            }
+            //        if (delta.Length() < 50f)
+            //        {
+            //            Timer[0] = 0;
+            //            State = 1;
+            //        }
+            //        break;
+            //    case (float)States.Slash:
+            //        if (Timer[0] > 60)
+            //        {
+            //            Timer[0] = 0;
+            //            State = 0;
+            //        }
+            //        break;
+            //    case (float)States.Dashing:
+            //        if (Timer[0] > 180 && NPC.velocity.Y == 0f)
+            //        {
+            //            State = (float)States.Walking;
+            //        }
+            //        break;
+            //}
         }
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)

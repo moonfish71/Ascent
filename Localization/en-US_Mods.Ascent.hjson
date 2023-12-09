@@ -1,0 +1,55 @@
+# This file will automatically update with entries for new content after a build and reload
+
+Items: {
+	locator: {
+		DisplayName: Debug Sword
+		Tooltip: Used for debugging
+	}
+
+	SRSummon: {
+		DisplayName: Slime Rain Summon
+		Tooltip: ""
+	}
+
+	DysonYo: {
+		DisplayName: Dyson Yo
+		Tooltip: YOU
+	}
+
+	FectoSpear: {
+		DisplayName: Conqueror's Talon
+		Tooltip:
+			'''
+			Peforms a 3-hit combo, ending in a dash
+			While in the air with wings equipped, press S while using this item to perform a glide while holding this spear out below you
+			'And Here We Are!'
+			'''
+	}
+
+	CodHelmet: {
+		DisplayName: LunarCod's Vacuum Helmet
+		Tooltip: Great for impersonating developers!
+	}
+
+	CodPants: {
+		DisplayName: LunarCod's Space Pants
+		Tooltip: Great for impersonating developers!
+	}
+
+	CodShirt: {
+		DisplayName: LunarCod's Spacesuit
+		Tooltip: Great for impersonating developers!
+	}
+}
+
+NPCs: {
+	ThrallS.DisplayName: Thrall Drone
+	ThrallL.DisplayName: Rhrall Supermajor
+	ThrallM.DisplayName: Thrall Soldier
+	AsterBoss.DisplayName: Fell Aster
+}
+
+Projectiles: {
+	FectoSpearProj.DisplayName: Conqueror's Talon
+	MadStar.DisplayName: Mad Star
+}

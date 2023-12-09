@@ -44,7 +44,7 @@ Items: {
 
 NPCs: {
 	ThrallS.DisplayName: Thrall Drone
-	ThrallL.DisplayName: Rhrall Supermajor
+	ThrallL.DisplayName: Thrall Supermajor
 	ThrallM.DisplayName: Thrall Soldier
 	AsterBoss.DisplayName: Fell Aster
 }
@@ -52,4 +52,15 @@ NPCs: {
 Projectiles: {
 	FectoSpearProj.DisplayName: Conqueror's Talon
 	MadStar.DisplayName: Mad Star
+}
+
+Configs: {
+	AscentServerConfig: {
+		DisplayName: Ascent Server Config
+
+		ParticleLimit: {
+			Label: Particle Limit
+			Tooltip: Controls the number of particles able to be generated in game. Lower this if the game is laggy
+		}
+	}
 }

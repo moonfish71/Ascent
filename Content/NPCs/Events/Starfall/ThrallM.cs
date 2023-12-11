@@ -84,16 +84,11 @@ namespace Ascent.Content.NPCs.Events.Starfall
 
             bool dashCheck = false;
 
-            SelectBehavior(delta);
-        }
-
-        private void SelectBehavior(Vector2 delta)
-        {
             switch (State)
             {
                 case (float)States.Walking:
 
-                    if(-500 < delta.X && delta.X < 500) //I hate this
+                    if (NPC.Distance(Main.player[NPC.target].Center) < 500) //I hate this
                     {
                         State = (float)States.Slash;
                         Timer[1] = 0;
@@ -101,12 +96,18 @@ namespace Ascent.Content.NPCs.Events.Starfall
 
                     break;
                 case (float)States.Slash:
-                    if (Timer[1] > 120)
-                    {
-                        State = (float)States.Walking;
-                        Timer[1] = 0;
-                    }
-                    break;
+                if (Timer[0] > 60)
+                {
+                    Timer[0] = 0;
+                    State = 0;
+                }
+                break;
+            case (float)States.Dashing:
+                if (Timer[0] > 180 && NPC.velocity.Y == 0f)
+                {
+                    State = (float)States.Walking;
+                }
+                break;
             }
         }
 

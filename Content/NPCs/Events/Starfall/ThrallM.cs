@@ -69,6 +69,31 @@ namespace Ascent.Content.NPCs.Events.Starfall
             switch (State)
             {
                 case (float)States.Walking:
+
+                    if (NPC.Distance(Main.player[NPC.target].Center) < 500) //I hate this
+                    {
+                        State = (float)States.Slash;
+                        Timer[1] = 0;
+                    }
+                    break;
+                case (float)States.Slash:
+                    if (Timer[0] > 60)
+                    {
+                        Timer[0] = 0;
+                        State = 0;
+                    }
+                    break;
+                case (float)States.Dashing:
+                    if (Timer[0] > 180 && NPC.velocity.Y == 0f)
+                    {
+                        State = (float)States.Walking;
+                    }
+                    break;
+            }
+
+            switch (State)
+            {
+                case (float)States.Walking:
                     NPC.aiStyle = NPCAIStyleID.Fighter;
                     NPC.velocity.X = NPC.direction * 1.2f;
                     break;
@@ -83,32 +108,6 @@ namespace Ascent.Content.NPCs.Events.Starfall
             }
 
             bool dashCheck = false;
-
-            switch (State)
-            {
-                case (float)States.Walking:
-
-                    if (NPC.Distance(Main.player[NPC.target].Center) < 500) //I hate this
-                    {
-                        State = (float)States.Slash;
-                        Timer[1] = 0;
-                    }
-
-                    break;
-                case (float)States.Slash:
-                if (Timer[0] > 60)
-                {
-                    Timer[0] = 0;
-                    State = 0;
-                }
-                break;
-            case (float)States.Dashing:
-                if (Timer[0] > 180 && NPC.velocity.Y == 0f)
-                {
-                    State = (float)States.Walking;
-                }
-                break;
-            }
         }
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)

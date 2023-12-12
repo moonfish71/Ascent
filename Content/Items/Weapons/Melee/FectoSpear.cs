@@ -58,6 +58,13 @@ namespace Ascent.Content.Items.Weapons.Melee
         bool SetInitCons;
         int InMouseDir = 1;
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.timeLeft = 20;
+        }
+
+        float timer = 0;
+
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
@@ -72,6 +79,8 @@ namespace Ascent.Content.Items.Weapons.Melee
                 SetInitCons = true;
             }
 
+            timer++;
+
             if (InMouseDir < 0)
             {
                 rotation += (float)(.25 / Math.Tau);
@@ -81,7 +90,7 @@ namespace Ascent.Content.Items.Weapons.Melee
                 rotation -= (float)(.25 / Math.Tau);
             }
 
-            length += 0.5f;
+            length = 0.5f + ModMath.QuadEase(timer/20f);
 
             Vector2 spearPath = armCenter + new Vector2(0,-length).RotatedBy(rotation);
 

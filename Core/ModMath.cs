@@ -88,7 +88,7 @@ namespace Ascent.Core
 
         public static float QuadEase(float easeValue)
         {
-            float result = -4f * easeValue * (easeValue - 1);
+            float result = Math.Clamp(-4f * easeValue * (easeValue - 1), 0f, 1f);
 
             return result;
         }

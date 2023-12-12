@@ -60,7 +60,7 @@ namespace Ascent.Content.Items.Weapons.Melee
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.timeLeft = 20;
+            Projectile.timeLeft = 30;
         }
 
         float timer = 0;
@@ -72,25 +72,19 @@ namespace Ascent.Content.Items.Weapons.Melee
 
             if (!SetInitCons)
             {
-                Vector2 MouseDelta = player.Center - Main.MouseWorld;
+                Vector2 MouseDelta = Main.MouseWorld - player.Center;
 
                 rotation = MouseDelta.ToRotation();
-                InMouseDir = Math.Sign(MouseDelta.X);
+                InMouseDir = -Math.Sign(MouseDelta.X);
                 SetInitCons = true;
+
             }
 
             timer++;
 
-            if (InMouseDir < 0)
-            {
-                rotation += (float)(.25 / Math.Tau);
-            }
-            else
-            {
-                rotation -= (float)(.25 / Math.Tau);
-            }
+            rotation += 2*(float)(1 / Math.Tau)/3.2f;
 
-            length = 0.5f + ModMath.QuadEase(timer/20f);
+            length = 0.5f + (250f * ModMath.QuadEase(timer/30f));
 
             Vector2 spearPath = armCenter + new Vector2(0,-length).RotatedBy(rotation);
 

@@ -60,7 +60,19 @@ Configs: {
 
 		ParticleLimit: {
 			Label: Particle Limit
-			Tooltip: Controls the number of particles able to be generated in game. Lower this if the game is laggy
+			Tooltip: Controls the number of particles able to be generated in game. Lower this if the game is laggy (Rounds to the nearest whole number in code)
 		}
+
+		TalkTextSetting: {
+			Label: Talk Interaction
+			Tooltip: Controls whether certain things talk using in-world text, the chatbox, or both.
+		}
+	}
+
+	talkInteraction: {
+		Tooltip: ""
+		World.Label: World
+		Chat.Label: Chat
+		Both.Label: Both
 	}
 }

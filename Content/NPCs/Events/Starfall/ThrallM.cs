@@ -66,30 +66,35 @@ namespace Ascent.Content.NPCs.Events.Starfall
             Timer[0]++;
             Timer[1]++;
 
+            NPC.netUpdate = true;
+
             switch (State)
             {
                 case (float)States.Walking:
 
-                    if (NPC.Distance(Main.player[NPC.target].Center) < 500) //I hate this
+                    if (NPC.Distance(Main.player[NPC.target].Center) < 100 && Main.rand.NextBool(10))
                     {
                         State = (float)States.Slash;
-                        Timer[1] = 0;
+                        Timer[0] = 0;
                     }
                     break;
                 case (float)States.Slash:
-                    if (Timer[0] > 60)
+                    if (Timer[0] > 100)
                     {
                         Timer[0] = 0;
-                        State = 0;
+                        State = (float)States.Walking;
                     }
                     break;
                 case (float)States.Dashing:
                     if (Timer[0] > 180 && NPC.velocity.Y == 0f)
                     {
                         State = (float)States.Walking;
+                        Timer[0] = 0;
                     }
                     break;
             }
+
+            NPC.netUpdate = false;
 
             switch (State)
             {
@@ -98,8 +103,13 @@ namespace Ascent.Content.NPCs.Events.Starfall
                     NPC.velocity.X = NPC.direction * 1.2f;
                     break;
                 case (float)States.Slash:
-                    NPC.velocity.X = 0;
+                    NPC.velocity.X *= 0.95f;
                     NPC.aiStyle = -1;
+
+                    if (Timer[0] == 40)
+                    {
+                        NPC.velocity.X += NPC.direction * 8f;
+                    }
                     break;
                 case (float)States.Dashing:
                     NPC.velocity.X *= .95f;
@@ -113,6 +123,11 @@ namespace Ascent.Content.NPCs.Events.Starfall
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
             return base.CanHitPlayer(target, ref cooldownSlot);
+        }
+
+        public override bool ModifyCollisionData(Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
+        {
+            return base.ModifyCollisionData(victimHitbox, ref immunityCooldownSlot, ref damageMultiplier, ref npcHitbox);
         }
     }
 }

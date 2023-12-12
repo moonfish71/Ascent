@@ -85,5 +85,12 @@ namespace Ascent.Core
         {
             return (float)(Math.Sqrt(parallax) * 5500f - 5500);
         }
+
+        public static float QuadEase(float easeValue)
+        {
+            float result = -4f * easeValue * (easeValue - 1);
+
+            return result;
+        }
     }
 }

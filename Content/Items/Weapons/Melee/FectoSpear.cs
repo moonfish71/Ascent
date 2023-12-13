@@ -165,6 +165,7 @@ namespace Ascent.Content.Items.Weapons.Melee
             if (Tipper)
             {
                 modifiers.FinalDamage *= 2f;
+                modifiers.SetCrit();
             }
         }
 

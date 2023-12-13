@@ -21,7 +21,7 @@ Items: {
 		Tooltip:
 			'''
 			Peforms a 3-hit combo, ending in a dash
-			While in the air with wings equipped, press S while using this item to perform a glide while holding this spear out below you
+			While in the air with wings equipped, right click to glide while holding this spear out below you
 			'And Here We Are!'
 			'''
 	}

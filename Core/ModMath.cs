@@ -92,5 +92,20 @@ namespace Ascent.Core
 
             return result;
         }
+
+        public static float QuartEase(float easeValue)
+        {
+            float result = (float)Math.Clamp(-16 * Math.Pow(easeValue - .5,4) - 1, 0f, 1f);
+
+            return result;
+        }
+        public static float easeInOutBack(float x){
+            const float c1 = 1.70158f;
+            const float c2 = c1 * 1.525f;
+
+            return (float)(x < 0.5
+            ? (Math.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+            : (Math.Pow(2 * x - 2, 2) * ((c2 + 1) * (x* 2 - 2) + c2) + 2) / 2);
+        }
     }
 }

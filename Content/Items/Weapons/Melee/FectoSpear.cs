@@ -19,10 +19,14 @@ namespace Ascent.Content.Items.Weapons.Melee
     {
         public override string Texture => QuickDirectory.MeleeTex + "FectoSpear";
 
+        int swing = 0;
+
         public override void SetDefaults()
         {
             Item.Size = new Vector2(64);
-            Item.damage = 10;
+            Item.damage = 50;
+            Item.crit = 4;
+            Item.knockBack = 6;
             Item.useTime = 40;
             Item.useAnimation = 40;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -38,14 +42,24 @@ namespace Ascent.Content.Items.Weapons.Melee
             base.UseStyle(player, heldItemFrame);
         }
 
+        public override bool? UseItem(Player player)
+        {
+            swing++;
+
+            if (swing > 1) swing = 0;
+
+            return base.UseItem(player);
+        }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int proj = Projectile.NewProjectile(source, position, velocity, type, damage, knockback);
             Projectile spear = Main.projectile[proj];
 
-            if(spear.ModProjectile is FectoSpearProj AHWA)
+            if (spear.ModProjectile is FectoSpearProj AHWA)
             {
-                AHWA.duration = Item.useTime * 4/3;
+                AHWA.Swing = swing;
+                AHWA.duration = Item.useTime;
             }
 
             return false;
@@ -69,10 +83,14 @@ namespace Ascent.Content.Items.Weapons.Melee
         }
 
         float length = 100;
+        float lengthMod = 150;
         float rotation = 0;
         public float duration = 60;
 
         float MouseRotation;
+        float SwingMagnitude = (float)Math.PI;
+
+        public int Swing = 0;
 
         bool SetInitCons;
         private int InMouseDir;
@@ -95,13 +113,25 @@ namespace Ascent.Content.Items.Weapons.Melee
                 MouseRotation = (float)(MouseDelta.ToRotation() + (Math.Tau/4));
                 InMouseDir = -Math.Sign(MouseDelta.X);
                 SetInitCons = true;
+
+                switch (Swing)
+                {
+                    case 0:
+                        SwingMagnitude = (float)Math.PI * 1.25f;
+                        lengthMod = 95;
+                        break;
+                    case 1:
+                        SwingMagnitude = -(float)Math.PI * 1.8f;
+                        lengthMod = 150;
+                        break;
+                }
             }
 
             timer++;
 
             //rotation += 2*(float)(1 / Math.Tau)/3.2f;
 
-            rotation = MathHelper.Lerp((float)(MouseRotation - -InMouseDir * Math.PI * 1.5f / 2), (float)(MouseRotation + -InMouseDir * Math.PI * 1.5f / 2), ModMath.easeInOutBack(timer / duration));
+            rotation = MathHelper.Lerp((float)(MouseRotation + InMouseDir * SwingMagnitude / 2), (float)(MouseRotation - InMouseDir * SwingMagnitude / 2), ModMath.easeInOutBack(timer / duration));
 
             float DLength = 1;
 
@@ -114,9 +144,9 @@ namespace Ascent.Content.Items.Weapons.Melee
                 DLength = ModMath.QuadEase(2 * (timer - (duration / 2)) / duration);
             }
 
-            DLength *= 150f;
+            DLength *= lengthMod;
 
-            length = 36 + DLength;
+            length = 50 + DLength;
 
             Vector2 spearPath = armCenter + new Vector2(0,-length).RotatedBy(rotation);
 
